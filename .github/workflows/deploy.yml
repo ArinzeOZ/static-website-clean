@@ -3,12 +3,12 @@ name: Deploy Static Website
 on:
   push:
     branches:
-      - main
+      - main       # only runs plan on pushes
+  workflow_dispatch: # allows manual run of apply
 
 jobs:
-  terraform:
+  terraform-plan:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,5 +26,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Apply
+      - name: Terraform Plan
+        run: terraform plan
+      - name: Terraform Plan
+        run: terraform plan
         run: terraform apply -auto-approve
